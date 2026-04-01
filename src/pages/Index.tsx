@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ShoppingCart, Search, Phone, X, Plus, Minus, Menu, ChevronRight } from "lucide-react";
+import { ShoppingCart, Search, Phone, X, Plus, Minus, Menu, ChevronRight, Package, Truck, Star } from "lucide-react";
 
 const categories = [
   { id: "all", label: "Все товары" },
@@ -208,7 +208,7 @@ const products = [
 
 type CartItem = { id: number; qty: number };
 
-function badgeStyle(type: string | null) {
+function getBadgeStyle(type: string | null): React.CSSProperties {
   if (type === "hit") return { background: "#fef037", color: "#333" };
   if (type === "sale") return { background: "#d20046", color: "#fff" };
   if (type === "new") return { background: "#10b16b", color: "#fff" };
@@ -257,30 +257,30 @@ export default function Index() {
   }
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f1f4f4", fontFamily: "'Roboto', Arial, sans-serif", color: "#333" }}>
+    <div style={{ minHeight: "100vh", background: "var(--ex-lt-gray)", fontFamily: "var(--defaultFontFamily), Arial, sans-serif", color: "var(--ex-dr-gray)" }}>
 
       {/* ===== HEADER ===== */}
-      <header style={{ background: "#fff", boxShadow: "0 0 10px hsla(0,0%,39%,.2)", position: "sticky", top: 0, zIndex: 50 }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 40px", display: "flex", alignItems: "center", gap: 24, height: 64 }}>
+      <header style={{ background: "var(--white)", boxShadow: "var(--shadow-md)", position: "sticky", top: 0, zIndex: 50 }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 var(--offset)", display: "flex", alignItems: "center", gap: 24, height: 64 }}>
 
           {/* Logo */}
           <a href="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none", flexShrink: 0 }}>
             <div style={{
               width: 38, height: 38,
-              background: "#fef037",
+              background: "var(--primary)",
               borderRadius: 4,
               display: "flex", alignItems: "center", justifyContent: "center",
-              fontWeight: 700, fontSize: 20, color: "#333"
+              fontWeight: 700, fontSize: 20, color: "var(--ex-dr-gray)",
             }}>П</div>
             <div style={{ lineHeight: 1.2 }}>
-              <div style={{ fontWeight: 700, fontSize: 15, color: "#333" }}>ПосудаОпт</div>
-              <div style={{ fontSize: 11, color: "#929999" }}>для кафе и ресторанов</div>
+              <div style={{ fontWeight: 700, fontSize: 15, color: "var(--ex-dr-gray)" }}>ПосудаОпт</div>
+              <div style={{ fontSize: 11, color: "var(--gray)" }}>для кафе и ресторанов</div>
             </div>
           </a>
 
           {/* Search */}
           <div style={{ flex: 1, maxWidth: 520, position: "relative" }}>
-            <Search style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "#929999", width: 16, height: 16 }} />
+            <Search style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "var(--gray)", width: 16, height: 16 }} />
             <input
               type="text"
               value={search}
@@ -292,15 +292,23 @@ export default function Index() {
           </div>
 
           {/* Nav links (desktop) */}
-          <nav style={{ display: "flex", alignItems: "center", gap: 24, fontSize: 14, color: "#666" }} className="hidden md:flex">
-            <a href="/" style={{ color: "#666", textDecoration: "none" }} onMouseEnter={e => (e.currentTarget.style.color = "#333")} onMouseLeave={e => (e.currentTarget.style.color = "#666")}>Каталог</a>
-            <a href="/" style={{ color: "#666", textDecoration: "none" }} onMouseEnter={e => (e.currentTarget.style.color = "#333")} onMouseLeave={e => (e.currentTarget.style.color = "#666")}>Доставка</a>
-            <a href="/" style={{ color: "#666", textDecoration: "none" }} onMouseEnter={e => (e.currentTarget.style.color = "#333")} onMouseLeave={e => (e.currentTarget.style.color = "#666")}>О нас</a>
+          <nav style={{ display: "flex", alignItems: "center", gap: 24, fontSize: 14 }} className="hidden md:flex">
+            <a href="/" style={{ color: "var(--dr-gray)", textDecoration: "none", transition: "color 0.15s" }}
+              onMouseEnter={e => (e.currentTarget.style.color = "var(--ex-dr-gray)")}
+              onMouseLeave={e => (e.currentTarget.style.color = "var(--dr-gray)")}>Каталог</a>
+            <a href="/" style={{ color: "var(--dr-gray)", textDecoration: "none", transition: "color 0.15s" }}
+              onMouseEnter={e => (e.currentTarget.style.color = "var(--ex-dr-gray)")}
+              onMouseLeave={e => (e.currentTarget.style.color = "var(--dr-gray)")}>Доставка</a>
+            <a href="/" style={{ color: "var(--dr-gray)", textDecoration: "none", transition: "color 0.15s" }}
+              onMouseEnter={e => (e.currentTarget.style.color = "var(--ex-dr-gray)")}
+              onMouseLeave={e => (e.currentTarget.style.color = "var(--dr-gray)")}>О нас</a>
           </nav>
 
           {/* Phone */}
-          <a href="tel:+78001234567" style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 14, color: "#666", textDecoration: "none", flexShrink: 0, whiteSpace: "nowrap" }} className="hidden md:flex">
-            <Phone style={{ width: 15, height: 15, color: "#10b16b" }} />
+          <a href="tel:+78001234567"
+            style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 14, color: "var(--dr-gray)", textDecoration: "none", flexShrink: 0, whiteSpace: "nowrap" }}
+            className="hidden md:flex">
+            <Phone style={{ width: 15, height: 15, color: "var(--secondary)" }} />
             8-800-123-45-67
           </a>
 
@@ -310,8 +318,8 @@ export default function Index() {
             style={{
               position: "relative",
               display: "flex", alignItems: "center", gap: 8,
-              background: "#fef037",
-              color: "#333",
+              background: "var(--primary)",
+              color: "var(--ex-dr-gray)",
               border: "none",
               borderRadius: 4,
               padding: "9px 16px",
@@ -320,16 +328,17 @@ export default function Index() {
               cursor: "pointer",
               flexShrink: 0,
               transition: "background 0.15s",
+              fontFamily: "inherit",
             }}
-            onMouseEnter={e => (e.currentTarget.style.background = "#cec001")}
-            onMouseLeave={e => (e.currentTarget.style.background = "#fef037")}
+            onMouseEnter={e => (e.currentTarget.style.background = "var(--primary-dark)")}
+            onMouseLeave={e => (e.currentTarget.style.background = "var(--primary)")}
           >
             <ShoppingCart style={{ width: 17, height: 17 }} />
             <span className="hidden sm:inline">Корзина</span>
             {totalItems > 0 && (
               <span style={{
                 position: "absolute", top: -8, right: -8,
-                background: "#d20046", color: "#fff",
+                background: "var(--red)", color: "var(--white)",
                 fontSize: 11, fontWeight: 700,
                 borderRadius: "50%", width: 20, height: 20,
                 display: "flex", alignItems: "center", justifyContent: "center",
@@ -340,57 +349,67 @@ export default function Index() {
           {/* Mobile menu button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            style={{ background: "none", border: "none", cursor: "pointer", padding: 6, borderRadius: 4, display: "none" }}
             className="md:hidden"
+            style={{ background: "none", border: "none", cursor: "pointer", padding: 6, borderRadius: 4 }}
           >
-            <Menu style={{ width: 22, height: 22, color: "#666" }} />
+            <Menu style={{ width: 22, height: 22, color: "var(--dr-gray)" }} />
           </button>
         </div>
 
-        {/* Mobile menu */}
+        {/* Mobile menu dropdown */}
         {mobileMenuOpen && (
-          <div style={{ borderTop: "1px solid #d8d8d8", background: "#fff", padding: "12px 20px", display: "flex", flexDirection: "column", gap: 8 }}>
-            <a href="tel:+78001234567" style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14, color: "#666", textDecoration: "none" }}>
-              <Phone style={{ width: 15, height: 15, color: "#10b16b" }} />
+          <div style={{ borderTop: "1px solid var(--lt-gray)", background: "var(--white)", padding: "12px 20px", display: "flex", flexDirection: "column", gap: 8 }}>
+            <a href="tel:+78001234567" style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14, color: "var(--dr-gray)", textDecoration: "none" }}>
+              <Phone style={{ width: 15, height: 15, color: "var(--secondary)" }} />
               8-800-123-45-67
             </a>
-            <a href="/" style={{ fontSize: 14, color: "#666", textDecoration: "none" }}>Каталог</a>
-            <a href="/" style={{ fontSize: 14, color: "#666", textDecoration: "none" }}>Доставка</a>
-            <a href="/" style={{ fontSize: 14, color: "#666", textDecoration: "none" }}>О нас</a>
+            <a href="/" style={{ fontSize: 14, color: "var(--dr-gray)", textDecoration: "none" }}>Каталог</a>
+            <a href="/" style={{ fontSize: 14, color: "var(--dr-gray)", textDecoration: "none" }}>Доставка</a>
+            <a href="/" style={{ fontSize: 14, color: "var(--dr-gray)", textDecoration: "none" }}>О нас</a>
           </div>
         )}
       </header>
 
       {/* ===== BREADCRUMB ===== */}
-      <div style={{ background: "#fff", borderBottom: "1px solid #d8d8d8" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "8px 40px", display: "flex", alignItems: "center", gap: 6, fontSize: 13, color: "#929999" }}>
-          <a href="/" style={{ color: "#929999", textDecoration: "none" }}>Главная</a>
+      <div style={{ background: "var(--white)", borderBottom: "1px solid var(--lt-gray)" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "8px var(--offset)", display: "flex", alignItems: "center", gap: 6, fontSize: 13, color: "var(--gray)" }}>
+          <a href="/" style={{ color: "var(--gray)", textDecoration: "none" }}>Главная</a>
           <ChevronRight style={{ width: 13, height: 13 }} />
-          <span style={{ color: "#333" }}>Каталог</span>
+          <span style={{ color: "var(--ex-dr-gray)" }}>Каталог</span>
         </div>
       </div>
 
-      {/* ===== MAIN CONTENT ===== */}
-      <main style={{ maxWidth: 1280, margin: "0 auto", padding: "30px 40px" }}>
+      {/* ===== MAIN ===== */}
+      <main style={{ maxWidth: 1280, margin: "0 auto", padding: "30px var(--offset)" }}>
 
         {/* Page title */}
         <div style={{ marginBottom: 24 }}>
-          <h1 style={{ fontSize: 26, fontWeight: 700, color: "#333", margin: 0, lineHeight: 1.2 }}>Каталог товаров</h1>
-          <p style={{ fontSize: 14, color: "#929999", marginTop: 6 }}>Профессиональная посуда для кафе, ресторанов и столовых</p>
+          <h1 style={{ fontSize: 26, fontWeight: 700, color: "var(--ex-dr-gray)", margin: 0, lineHeight: 1.2 }}>Каталог товаров</h1>
+          <p style={{ fontSize: 14, color: "var(--gray)", marginTop: 6, marginBottom: 0 }}>Профессиональная посуда для кафе, ресторанов и столовых</p>
         </div>
 
         <div style={{ display: "flex", gap: 24, alignItems: "flex-start" }}>
 
           {/* ===== SIDEBAR CATEGORIES ===== */}
-          <aside style={{
-            width: 220,
-            flexShrink: 0,
-            background: "#fff",
-            borderRadius: 4,
-            boxShadow: "0 0 10px hsla(0,0%,39%,.2)",
-            overflow: "hidden",
-          }} className="hidden md:block">
-            <div style={{ padding: "14px 16px", borderBottom: "1px solid #d8d8d8", fontWeight: 600, fontSize: 13, color: "#666", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+          <aside
+            className="hidden md:block"
+            style={{
+              width: 220,
+              flexShrink: 0,
+              background: "var(--white)",
+              borderRadius: 4,
+              boxShadow: "var(--shadow-md)",
+              overflow: "hidden",
+            }}>
+            <div style={{
+              padding: "14px 16px",
+              borderBottom: "1px solid var(--lt-gray)",
+              fontWeight: 600,
+              fontSize: 13,
+              color: "var(--dr-gray)",
+              textTransform: "uppercase",
+              letterSpacing: "0.05em",
+            }}>
               Категории
             </div>
             {categories.map((cat) => (
@@ -403,33 +422,38 @@ export default function Index() {
                   justifyContent: "space-between",
                   width: "100%",
                   padding: "11px 16px",
-                  background: activeCategory === cat.id ? "#fffbcf" : "transparent",
-                  borderLeft: activeCategory === cat.id ? "3px solid #cec001" : "3px solid transparent",
+                  background: activeCategory === cat.id ? "var(--primary-lighter)" : "transparent",
+                  borderLeft: activeCategory === cat.id ? "3px solid var(--primary-dark)" : "3px solid transparent",
                   border: "none",
-                  borderBottom: "1px solid #f1f4f4",
+                  borderBottom: "1px solid var(--ex-lt-gray)",
                   cursor: "pointer",
                   fontSize: 14,
-                  color: activeCategory === cat.id ? "#333" : "#666",
+                  color: activeCategory === cat.id ? "var(--ex-dr-gray)" : "var(--dr-gray)",
                   fontWeight: activeCategory === cat.id ? 500 : 400,
                   textAlign: "left",
                   transition: "all 0.15s",
                   fontFamily: "inherit",
+                  borderLeftWidth: 3,
+                  borderLeftStyle: "solid",
+                  borderLeftColor: activeCategory === cat.id ? "var(--primary-dark)" : "transparent",
                 }}
                 onMouseEnter={e => {
                   if (activeCategory !== cat.id) {
-                    e.currentTarget.style.background = "#f9f9f9";
-                    e.currentTarget.style.color = "#333";
+                    e.currentTarget.style.background = "var(--xl-gray)";
+                    e.currentTarget.style.color = "var(--ex-dr-gray)";
                   }
                 }}
                 onMouseLeave={e => {
                   if (activeCategory !== cat.id) {
                     e.currentTarget.style.background = "transparent";
-                    e.currentTarget.style.color = "#666";
+                    e.currentTarget.style.color = "var(--dr-gray)";
                   }
                 }}
               >
                 <span>{cat.label}</span>
-                {activeCategory === cat.id && <ChevronRight style={{ width: 14, height: 14, color: "#cec001" }} />}
+                {activeCategory === cat.id && (
+                  <ChevronRight style={{ width: 14, height: 14, color: "var(--primary-dark)" }} />
+                )}
               </button>
             ))}
           </aside>
@@ -437,8 +461,8 @@ export default function Index() {
           {/* ===== PRODUCTS AREA ===== */}
           <div style={{ flex: 1, minWidth: 0 }}>
 
-            {/* Mobile categories scroll */}
-            <div style={{ display: "flex", gap: 8, overflowX: "auto", paddingBottom: 4, marginBottom: 20 }} className="md:hidden">
+            {/* Mobile category pills */}
+            <div className="md:hidden" style={{ display: "flex", gap: 8, overflowX: "auto", paddingBottom: 4, marginBottom: 20 }}>
               {categories.map((cat) => (
                 <button
                   key={cat.id}
@@ -447,13 +471,13 @@ export default function Index() {
                     padding: "7px 14px",
                     borderRadius: 4,
                     border: "1px solid",
-                    borderColor: activeCategory === cat.id ? "#cec001" : "#d8d8d8",
-                    background: activeCategory === cat.id ? "#fef037" : "#fff",
-                    color: activeCategory === cat.id ? "#333" : "#666",
-                    fontSize: 13,
+                    borderColor: activeCategory === cat.id ? "var(--primary-dark)" : "var(--lt-gray)",
+                    background: activeCategory === cat.id ? "var(--primary-lighter)" : "var(--white)",
+                    color: activeCategory === cat.id ? "var(--ex-dr-gray)" : "var(--dr-gray)",
                     fontWeight: activeCategory === cat.id ? 500 : 400,
-                    cursor: "pointer",
+                    fontSize: 13,
                     whiteSpace: "nowrap",
+                    cursor: "pointer",
                     fontFamily: "inherit",
                     transition: "all 0.15s",
                   }}
@@ -463,51 +487,23 @@ export default function Index() {
               ))}
             </div>
 
-            {/* Results count + sort bar */}
-            <div style={{
-              display: "flex", alignItems: "center", justifyContent: "space-between",
-              marginBottom: 16,
-              padding: "10px 16px",
-              background: "#fff",
-              borderRadius: 4,
-              boxShadow: "0 0 10px hsla(0,0%,39%,.2)",
-              fontSize: 13,
-              color: "#929999",
-            }}>
-              <span>Найдено товаров: <strong style={{ color: "#333" }}>{filtered.length}</strong></span>
-              <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                Сортировка:
-                <select style={{
-                  border: "1px solid #d8d8d8",
-                  borderRadius: 4,
-                  padding: "3px 8px",
-                  fontSize: 13,
-                  color: "#666",
-                  background: "#fff",
-                  cursor: "pointer",
-                  fontFamily: "inherit",
-                  outline: "none",
-                }}>
-                  <option>По умолчанию</option>
-                  <option>По цене ↑</option>
-                  <option>По цене ↓</option>
-                  <option>Новинки</option>
-                </select>
-              </span>
+            {/* Products count */}
+            <div style={{ marginBottom: 16, fontSize: 13, color: "var(--gray)" }}>
+              Найдено товаров: <span style={{ color: "var(--ex-dr-gray)", fontWeight: 500 }}>{filtered.length}</span>
             </div>
 
-            {/* Product grid */}
+            {/* Products grid */}
             {filtered.length === 0 ? (
               <div style={{
-                background: "#fff",
+                background: "var(--white)",
                 borderRadius: 4,
-                boxShadow: "0 0 10px hsla(0,0%,39%,.2)",
+                boxShadow: "var(--shadow-md)",
                 padding: "60px 20px",
                 textAlign: "center",
-                color: "#929999",
+                color: "var(--gray)",
               }}>
-                <Search style={{ width: 40, height: 40, margin: "0 auto 12px", opacity: 0.3 }} />
-                <div style={{ fontSize: 16, fontWeight: 500, color: "#666", marginBottom: 6 }}>Товары не найдены</div>
+                <Search style={{ width: 40, height: 40, margin: "0 auto 16px", color: "var(--lt-gray)" }} />
+                <div style={{ fontSize: 16, fontWeight: 500, marginBottom: 8, color: "var(--dr-gray)" }}>Товары не найдены</div>
                 <div style={{ fontSize: 14 }}>Попробуйте изменить запрос или выбрать другую категорию</div>
               </div>
             ) : (
@@ -518,181 +514,228 @@ export default function Index() {
               }}>
                 {filtered.map((product) => {
                   const qty = getQty(product.id);
-                  const discount = product.oldPrice
-                    ? Math.round((1 - product.price / product.oldPrice) * 100)
-                    : null;
-
                   return (
                     <div
                       key={product.id}
                       className="kr-card"
-                      style={{ display: "flex", flexDirection: "column", overflow: "hidden", position: "relative" }}
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        overflow: "hidden",
+                        transition: "box-shadow 0.2s",
+                        opacity: product.inStock ? 1 : 0.7,
+                      }}
+                      onMouseEnter={e => (e.currentTarget.style.boxShadow = "var(--shadow-lg)")}
+                      onMouseLeave={e => (e.currentTarget.style.boxShadow = "var(--shadow-md)")}
                     >
-                      {/* Badge */}
-                      {product.badge && (
-                        <div style={{
-                          position: "absolute", top: 10, left: 10,
-                          zIndex: 2,
-                          ...badgeStyle(product.badgeType),
-                          borderRadius: 3,
-                          fontSize: 11,
-                          fontWeight: 700,
-                          padding: "3px 8px",
-                          letterSpacing: "0.02em",
-                        }}>
-                          {product.badge}
-                        </div>
-                      )}
-                      {/* Discount percent */}
-                      {discount && (
-                        <div style={{
-                          position: "absolute", top: product.badge ? 36 : 10, left: 10,
-                          zIndex: 2,
-                          background: "#d20046",
-                          color: "#fff",
-                          borderRadius: 3,
-                          fontSize: 11,
-                          fontWeight: 700,
-                          padding: "3px 8px",
-                        }}>
-                          -{discount}%
-                        </div>
-                      )}
-                      {/* Out of stock overlay */}
-                      {!product.inStock && (
-                        <div style={{
-                          position: "absolute", inset: 0,
-                          background: "rgba(255,255,255,0.7)",
-                          zIndex: 3,
-                          display: "flex", alignItems: "center", justifyContent: "center",
-                        }}>
-                          <span style={{
-                            background: "#d8d8d8", color: "#929999",
-                            padding: "6px 14px", borderRadius: 4,
-                            fontSize: 12, fontWeight: 600,
-                          }}>Нет в наличии</span>
-                        </div>
-                      )}
-
-                      {/* Image */}
-                      <div style={{ position: "relative", aspectRatio: "1/1", overflow: "hidden", background: "#f9f9f9" }}>
+                      {/* Product image */}
+                      <div style={{ position: "relative", paddingTop: "75%", background: "var(--xl-gray)", overflow: "hidden" }}>
                         <img
                           src={product.image}
                           alt={product.name}
-                          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.3s ease" }}
-                          onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.04)")}
-                          onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
+                          style={{
+                            position: "absolute", inset: 0,
+                            width: "100%", height: "100%",
+                            objectFit: "contain",
+                            padding: 8,
+                          }}
                         />
+                        {/* Badge */}
+                        {product.badge && (
+                          <div style={{
+                            position: "absolute",
+                            top: 8, left: 8,
+                            ...getBadgeStyle(product.badgeType),
+                            padding: "3px 8px",
+                            borderRadius: 3,
+                            fontSize: 11,
+                            fontWeight: 700,
+                            lineHeight: 1.5,
+                          }}>
+                            {product.badge}
+                          </div>
+                        )}
+                        {/* Out of stock overlay */}
+                        {!product.inStock && (
+                          <div style={{
+                            position: "absolute", inset: 0,
+                            background: "rgba(255,255,255,0.5)",
+                            display: "flex", alignItems: "center", justifyContent: "center",
+                          }}>
+                            <span style={{
+                              background: "var(--ex-dr-gray)",
+                              color: "var(--white)",
+                              fontSize: 11,
+                              fontWeight: 700,
+                              padding: "4px 12px",
+                              borderRadius: 3,
+                              textTransform: "uppercase",
+                              letterSpacing: "0.05em",
+                            }}>Нет в наличии</span>
+                          </div>
+                        )}
                       </div>
 
-                      {/* Info */}
-                      <div style={{ padding: "14px 14px 0", flex: 1 }}>
-                        {/* Specs row */}
-                        <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 8 }}>
+                      {/* Product info */}
+                      <div style={{ padding: "12px 14px", flex: 1, display: "flex", flexDirection: "column" }}>
+
+                        {/* Sort badge + unit */}
+                        <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
                           <span style={{
-                            fontSize: 11, color: "#929999",
-                            background: "#f1f4f4",
-                            borderRadius: 2, padding: "2px 6px",
-                          }}>{product.material}</span>
-                          <span style={{
-                            fontSize: 11, color: "#929999",
-                            background: "#f1f4f4",
-                            borderRadius: 2, padding: "2px 6px",
-                          }}>{product.size}</span>
-                          <span style={{
-                            fontSize: 11, color: "#929999",
-                            background: "#f1f4f4",
-                            borderRadius: 2, padding: "2px 6px",
+                            fontSize: 10,
+                            fontWeight: 700,
+                            color: "var(--secondary)",
+                            border: "1px solid var(--secondary-lighter)",
+                            borderRadius: 3,
+                            padding: "1px 5px",
+                            textTransform: "uppercase",
+                            letterSpacing: "0.04em",
                           }}>{product.sort}</span>
+                          <span style={{ fontSize: 11, color: "var(--gray)" }}>/ {product.unit}</span>
                         </div>
 
                         {/* Name */}
-                        <h3 style={{
-                          fontSize: 13.5,
+                        <div style={{
+                          fontSize: 13,
                           fontWeight: 500,
-                          color: "#333",
-                          margin: "0 0 8px",
-                          lineHeight: 1.35,
-                          display: "-webkit-box",
-                          WebkitLineClamp: 2,
-                          WebkitBoxOrient: "vertical",
-                          overflow: "hidden",
+                          color: "var(--ex-dr-gray)",
+                          lineHeight: 1.4,
+                          marginBottom: 8,
+                          flex: 1,
                         }}>
                           {product.name}
-                        </h3>
-
-                        {/* Packaging */}
-                        <div style={{ fontSize: 12, color: "#929999", marginBottom: 10 }}>
-                          Упаковка: <span style={{ color: "#666" }}>{product.packaging}</span>
                         </div>
 
-                        {/* Price */}
+                        {/* Specs */}
+                        <div style={{ display: "flex", flexWrap: "wrap", gap: "3px 10px", marginBottom: 10 }}>
+                          {product.material && (
+                            <span style={{ fontSize: 11, color: "var(--gray)" }}>{product.material}</span>
+                          )}
+                          {product.size && (
+                            <span style={{ fontSize: 11, color: "var(--gray)" }}>{product.size}</span>
+                          )}
+                          {product.packaging && (
+                            <span style={{ fontSize: 11, color: "var(--gray)" }}>{product.packaging}</span>
+                          )}
+                        </div>
+
+                        {/* Stock status */}
+                        <div style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 5,
+                          marginBottom: 10,
+                          fontSize: 12,
+                          color: product.inStock ? "var(--secondary)" : "var(--gray)",
+                          fontWeight: 500,
+                        }}>
+                          <div style={{
+                            width: 6, height: 6,
+                            borderRadius: "50%",
+                            background: product.inStock ? "var(--secondary)" : "var(--lt-gray)",
+                            flexShrink: 0,
+                          }} />
+                          {product.inStock ? "В наличии" : "Нет в наличии"}
+                        </div>
+
+                        {/* Price row */}
                         <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 12 }}>
-                          <span style={{ fontSize: 20, fontWeight: 700, color: "#333" }}>
-                            {product.price.toLocaleString("ru-RU")} ₽
+                          <span style={{ fontSize: 20, fontWeight: 700, color: "var(--ex-dr-gray)", lineHeight: 1 }}>
+                            {product.price} ₽
                           </span>
-                          <span style={{ fontSize: 12, color: "#929999" }}>/ {product.unit}</span>
                           {product.oldPrice && (
-                            <span style={{ fontSize: 13, color: "#bbb", textDecoration: "line-through" }}>
-                              {product.oldPrice.toLocaleString("ru-RU")} ₽
+                            <span style={{ fontSize: 13, color: "var(--gray)", textDecoration: "line-through" }}>
+                              {product.oldPrice} ₽
                             </span>
                           )}
                         </div>
-                      </div>
 
-                      {/* Add to cart */}
-                      <div style={{ padding: "0 14px 14px" }}>
+                        {/* Add to cart */}
                         {product.inStock ? (
                           qty === 0 ? (
                             <button
                               onClick={() => addToCart(product.id)}
                               style={{
                                 width: "100%",
-                                background: "#fef037",
-                                color: "#333",
+                                height: 36,
+                                background: "var(--primary)",
+                                color: "var(--ex-dr-gray)",
                                 border: "none",
                                 borderRadius: 4,
-                                padding: "9px 0",
                                 fontSize: 13,
-                                fontWeight: 600,
+                                fontWeight: 500,
                                 cursor: "pointer",
-                                display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
-                                transition: "background 0.15s",
                                 fontFamily: "inherit",
+                                transition: "background 0.15s",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                gap: 6,
                               }}
-                              onMouseEnter={e => (e.currentTarget.style.background = "#cec001")}
-                              onMouseLeave={e => (e.currentTarget.style.background = "#fef037")}
+                              onMouseEnter={e => (e.currentTarget.style.background = "var(--primary-dark)")}
+                              onMouseLeave={e => (e.currentTarget.style.background = "var(--primary)")}
                             >
                               <ShoppingCart style={{ width: 15, height: 15 }} />
                               В корзину
                             </button>
                           ) : (
-                            <div style={{ display: "flex", alignItems: "center", gap: 0, border: "2px solid #fef037", borderRadius: 4, overflow: "hidden" }}>
+                            <div style={{ display: "flex", alignItems: "center", gap: 0, height: 36, border: "1px solid var(--lt-gray)", borderRadius: 4, overflow: "hidden" }}>
                               <button
                                 onClick={() => updateQty(product.id, -1)}
-                                style={{ flex: "0 0 36px", height: 36, background: "#fef037", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "background 0.15s", fontFamily: "inherit" }}
-                                onMouseEnter={e => (e.currentTarget.style.background = "#cec001")}
-                                onMouseLeave={e => (e.currentTarget.style.background = "#fef037")}
+                                style={{
+                                  width: 36, height: 36, flexShrink: 0,
+                                  border: "none", borderRight: "1px solid var(--lt-gray)",
+                                  background: "var(--xl-gray)",
+                                  cursor: "pointer",
+                                  display: "flex", alignItems: "center", justifyContent: "center",
+                                  color: "var(--dr-gray)",
+                                  fontSize: 18,
+                                  transition: "background 0.15s",
+                                  fontFamily: "inherit",
+                                }}
+                                onMouseEnter={e => (e.currentTarget.style.background = "var(--primary-lighter)")}
+                                onMouseLeave={e => (e.currentTarget.style.background = "var(--xl-gray)")}
                               >
-                                <Minus style={{ width: 14, height: 14, color: "#333" }} />
+                                <Minus style={{ width: 14, height: 14 }} />
                               </button>
-                              <span style={{ flex: 1, textAlign: "center", fontSize: 14, fontWeight: 600, color: "#333" }}>{qty}</span>
+                              <div style={{ flex: 1, textAlign: "center", fontWeight: 600, fontSize: 15, color: "var(--ex-dr-gray)" }}>
+                                {qty}
+                              </div>
                               <button
-                                onClick={() => addToCart(product.id)}
-                                style={{ flex: "0 0 36px", height: 36, background: "#fef037", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "background 0.15s", fontFamily: "inherit" }}
-                                onMouseEnter={e => (e.currentTarget.style.background = "#cec001")}
-                                onMouseLeave={e => (e.currentTarget.style.background = "#fef037")}
+                                onClick={() => updateQty(product.id, 1)}
+                                style={{
+                                  width: 36, height: 36, flexShrink: 0,
+                                  border: "none", borderLeft: "1px solid var(--lt-gray)",
+                                  background: "var(--primary)",
+                                  cursor: "pointer",
+                                  display: "flex", alignItems: "center", justifyContent: "center",
+                                  color: "var(--ex-dr-gray)",
+                                  fontSize: 18,
+                                  transition: "background 0.15s",
+                                  fontFamily: "inherit",
+                                }}
+                                onMouseEnter={e => (e.currentTarget.style.background = "var(--primary-dark)")}
+                                onMouseLeave={e => (e.currentTarget.style.background = "var(--primary)")}
                               >
-                                <Plus style={{ width: 14, height: 14, color: "#333" }} />
+                                <Plus style={{ width: 14, height: 14 }} />
                               </button>
                             </div>
                           )
                         ) : (
-                          <button disabled style={{
-                            width: "100%", background: "#f1f4f4", color: "#bbb",
-                            border: "1px solid #d8d8d8", borderRadius: 4, padding: "9px 0",
-                            fontSize: 13, fontWeight: 500, cursor: "not-allowed", fontFamily: "inherit",
-                          }}>
+                          <button
+                            disabled
+                            style={{
+                              width: "100%",
+                              height: 36,
+                              background: "var(--ex-lt-gray)",
+                              color: "var(--disabled)",
+                              border: "1px solid var(--lt-gray)",
+                              borderRadius: 4,
+                              fontSize: 13,
+                              cursor: "not-allowed",
+                              fontFamily: "inherit",
+                            }}
+                          >
                             Нет в наличии
                           </button>
                         )}
@@ -706,209 +749,307 @@ export default function Index() {
         </div>
       </main>
 
+      {/* ===== INFO STRIP ===== */}
+      <div style={{ background: "var(--white)", borderTop: "1px solid var(--lt-gray)", marginTop: 40 }}>
+        <div style={{
+          maxWidth: 1280, margin: "0 auto",
+          padding: "24px var(--offset)",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+          gap: 24,
+        }}>
+          {[
+            { icon: <Truck style={{ width: 28, height: 28, color: "var(--primary-dark)" }} />, title: "Быстрая доставка", desc: "Доставим по всей России" },
+            { icon: <Package style={{ width: 28, height: 28, color: "var(--primary-dark)" }} />, title: "Оптовые цены", desc: "Минимальная партия от 1 уп." },
+            { icon: <Star style={{ width: 28, height: 28, color: "var(--primary-dark)" }} />, title: "Сертифицированный товар", desc: "Все позиции с документами" },
+            { icon: <Phone style={{ width: 28, height: 28, color: "var(--primary-dark)" }} />, title: "Поддержка 24/7", desc: "Ответим на любой вопрос" },
+          ].map((item, i) => (
+            <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
+              <div style={{
+                width: 48, height: 48,
+                background: "var(--primary-lighter)",
+                borderRadius: 4,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                flexShrink: 0,
+              }}>
+                {item.icon}
+              </div>
+              <div>
+                <div style={{ fontWeight: 600, fontSize: 14, color: "var(--ex-dr-gray)", marginBottom: 4 }}>{item.title}</div>
+                <div style={{ fontSize: 13, color: "var(--gray)" }}>{item.desc}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* ===== FOOTER ===== */}
-      <footer style={{ background: "#333", color: "#d8d8d8", marginTop: 48 }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "40px 40px 24px" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 32, marginBottom: 32 }}>
-            {/* Company */}
+      <footer style={{ background: "var(--ex-dr-gray)", color: "var(--white)" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "40px var(--offset)" }}>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+            gap: 32,
+            marginBottom: 32,
+          }}>
+            {/* Brand */}
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
-                <div style={{ width: 34, height: 34, background: "#fef037", borderRadius: 4, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: 18, color: "#333" }}>П</div>
+                <div style={{
+                  width: 36, height: 36,
+                  background: "var(--primary)",
+                  borderRadius: 4,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontWeight: 700, fontSize: 18, color: "var(--ex-dr-gray)",
+                }}>П</div>
                 <div>
-                  <div style={{ fontWeight: 700, fontSize: 14, color: "#fff" }}>ПосудаОпт</div>
-                  <div style={{ fontSize: 11, color: "#929999" }}>для кафе и ресторанов</div>
+                  <div style={{ fontWeight: 700, fontSize: 14, color: "var(--white)" }}>ПосудаОпт</div>
+                  <div style={{ fontSize: 11, color: "var(--gray)" }}>для кафе и ресторанов</div>
                 </div>
               </div>
-              <p style={{ fontSize: 13, lineHeight: 1.6, color: "#929999", margin: 0 }}>
-                Профессиональная посуда оптом. Поставки для кафе, ресторанов, гостиниц и столовых по всей России.
+              <p style={{ fontSize: 13, color: "var(--gray)", lineHeight: 1.6, margin: 0 }}>
+                Профессиональная посуда оптом для заведений общественного питания.
               </p>
             </div>
 
             {/* Catalog */}
             <div>
-              <div style={{ fontWeight: 600, fontSize: 13, color: "#fff", marginBottom: 14, textTransform: "uppercase", letterSpacing: "0.05em" }}>Каталог</div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                {categories.slice(1).map(cat => (
-                  <a key={cat.id} href="/" style={{ fontSize: 13, color: "#929999", textDecoration: "none", transition: "color 0.15s" }}
-                    onMouseEnter={e => (e.currentTarget.style.color = "#fef037")}
-                    onMouseLeave={e => (e.currentTarget.style.color = "#929999")}
-                  >{cat.label}</a>
-                ))}
-              </div>
+              <div style={{ fontWeight: 600, fontSize: 13, color: "var(--white)", marginBottom: 14, textTransform: "uppercase", letterSpacing: "0.05em" }}>Каталог</div>
+              {categories.slice(1).map(cat => (
+                <div key={cat.id} style={{ marginBottom: 8 }}>
+                  <a href="/" style={{ fontSize: 13, color: "var(--gray)", textDecoration: "none", transition: "color 0.15s" }}
+                    onMouseEnter={e => (e.currentTarget.style.color = "var(--white)")}
+                    onMouseLeave={e => (e.currentTarget.style.color = "var(--gray)")}>
+                    {cat.label}
+                  </a>
+                </div>
+              ))}
             </div>
 
-            {/* Info */}
+            {/* Company */}
             <div>
-              <div style={{ fontWeight: 600, fontSize: 13, color: "#fff", marginBottom: 14, textTransform: "uppercase", letterSpacing: "0.05em" }}>Информация</div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                {["О компании", "Доставка и оплата", "Возврат товара", "Контакты"].map(link => (
-                  <a key={link} href="/" style={{ fontSize: 13, color: "#929999", textDecoration: "none" }}
-                    onMouseEnter={e => (e.currentTarget.style.color = "#fef037")}
-                    onMouseLeave={e => (e.currentTarget.style.color = "#929999")}
-                  >{link}</a>
-                ))}
-              </div>
+              <div style={{ fontWeight: 600, fontSize: 13, color: "var(--white)", marginBottom: 14, textTransform: "uppercase", letterSpacing: "0.05em" }}>Компания</div>
+              {["О нас", "Доставка и оплата", "Возврат", "Контакты"].map(link => (
+                <div key={link} style={{ marginBottom: 8 }}>
+                  <a href="/" style={{ fontSize: 13, color: "var(--gray)", textDecoration: "none", transition: "color 0.15s" }}
+                    onMouseEnter={e => (e.currentTarget.style.color = "var(--white)")}
+                    onMouseLeave={e => (e.currentTarget.style.color = "var(--gray)")}>
+                    {link}
+                  </a>
+                </div>
+              ))}
             </div>
 
             {/* Contacts */}
             <div>
-              <div style={{ fontWeight: 600, fontSize: 13, color: "#fff", marginBottom: 14, textTransform: "uppercase", letterSpacing: "0.05em" }}>Контакты</div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <Phone style={{ width: 14, height: 14, color: "#10b16b", flexShrink: 0 }} />
-                  <a href="tel:+78001234567" style={{ fontSize: 14, fontWeight: 600, color: "#fff", textDecoration: "none" }}>8-800-123-45-67</a>
-                </div>
-                <div style={{ fontSize: 12, color: "#929999" }}>Бесплатно по России</div>
-                <div style={{ fontSize: 13, color: "#929999", marginTop: 4 }}>Пн–Пт: 9:00–18:00</div>
+              <div style={{ fontWeight: 600, fontSize: 13, color: "var(--white)", marginBottom: 14, textTransform: "uppercase", letterSpacing: "0.05em" }}>Контакты</div>
+              <a href="tel:+78001234567" style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14, color: "var(--white)", textDecoration: "none", marginBottom: 10 }}>
+                <Phone style={{ width: 15, height: 15, color: "var(--primary)" }} />
+                8-800-123-45-67
+              </a>
+              <div style={{ fontSize: 13, color: "var(--gray)", lineHeight: 1.6 }}>
+                Пн–Пт: 9:00–18:00<br />
+                Сб: 10:00–15:00
               </div>
             </div>
           </div>
 
-          {/* Bottom bar */}
-          <div style={{ borderTop: "1px solid #444", paddingTop: 20, display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
-            <span style={{ fontSize: 12, color: "#666" }}>© 2024 ПосудаОпт. Все права защищены.</span>
+          {/* Footer bottom */}
+          <div style={{ borderTop: "1px solid rgba(255,255,255,0.1)", paddingTop: 20, display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center", justifyContent: "space-between" }}>
+            <div style={{ fontSize: 12, color: "var(--gray)" }}>
+              © 2024 ПосудаОпт. Все права защищены.
+            </div>
             <div style={{ display: "flex", gap: 16 }}>
-              <a href="/" style={{ fontSize: 12, color: "#666", textDecoration: "none" }}>Политика конфиденциальности</a>
-              <a href="/" style={{ fontSize: 12, color: "#666", textDecoration: "none" }}>Пользовательское соглашение</a>
+              {["Политика конфиденциальности", "Оферта"].map(link => (
+                <a key={link} href="/" style={{ fontSize: 12, color: "var(--gray)", textDecoration: "none" }}
+                  onMouseEnter={e => (e.currentTarget.style.color = "var(--white)")}
+                  onMouseLeave={e => (e.currentTarget.style.color = "var(--gray)")}>
+                  {link}
+                </a>
+              ))}
             </div>
           </div>
         </div>
       </footer>
 
-      {/* ===== CART DRAWER ===== */}
+      {/* ===== CART SIDEBAR ===== */}
       {cartOpen && (
-        <div style={{ position: "fixed", inset: 0, zIndex: 100, display: "flex" }}>
-          {/* Backdrop */}
+        <div style={{ position: "fixed", inset: 0, zIndex: 100 }}>
+          {/* Overlay */}
           <div
-            style={{ flex: 1, background: "rgba(0,0,0,0.5)" }}
+            style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.4)" }}
             onClick={() => setCartOpen(false)}
           />
+
           {/* Panel */}
           <div style={{
-            width: 420,
-            maxWidth: "100vw",
-            background: "#fff",
-            display: "flex",
-            flexDirection: "column",
+            position: "absolute", top: 0, right: 0, bottom: 0,
+            width: "100%", maxWidth: 420,
+            background: "var(--white)",
+            display: "flex", flexDirection: "column",
             boxShadow: "-4px 0 20px rgba(0,0,0,0.15)",
           }}>
             {/* Cart header */}
             <div style={{
               display: "flex", alignItems: "center", justifyContent: "space-between",
-              padding: "18px 20px",
-              borderBottom: "1px solid #d8d8d8",
+              padding: "16px 20px",
+              borderBottom: "1px solid var(--lt-gray)",
             }}>
               <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <ShoppingCart style={{ width: 20, height: 20, color: "#333" }} />
-                <span style={{ fontWeight: 700, fontSize: 16, color: "#333" }}>Корзина</span>
+                <ShoppingCart style={{ width: 20, height: 20, color: "var(--primary-dark)" }} />
+                <span style={{ fontWeight: 700, fontSize: 16, color: "var(--ex-dr-gray)" }}>Корзина</span>
                 {totalItems > 0 && (
-                  <span style={{ background: "#fef037", color: "#333", fontSize: 12, fontWeight: 700, borderRadius: 3, padding: "2px 8px" }}>
-                    {totalItems} шт.
-                  </span>
+                  <span style={{
+                    background: "var(--primary)",
+                    color: "var(--ex-dr-gray)",
+                    fontSize: 12, fontWeight: 700,
+                    borderRadius: 3, padding: "2px 7px",
+                  }}>{totalItems} шт.</span>
                 )}
               </div>
               <button
                 onClick={() => setCartOpen(false)}
-                style={{ background: "none", border: "none", cursor: "pointer", padding: 4, borderRadius: 4, display: "flex" }}
+                style={{ background: "none", border: "none", cursor: "pointer", padding: 4, borderRadius: 4, color: "var(--gray)" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "var(--ex-dr-gray)")}
+                onMouseLeave={e => (e.currentTarget.style.color = "var(--gray)")}
               >
-                <X style={{ width: 20, height: 20, color: "#929999" }} />
+                <X style={{ width: 20, height: 20 }} />
               </button>
             </div>
 
             {/* Cart items */}
-            <div style={{ flex: 1, overflowY: "auto", padding: "16px 20px" }}>
+            <div style={{ flex: 1, overflowY: "auto", padding: "12px 0" }}>
               {cart.length === 0 ? (
-                <div style={{ textAlign: "center", padding: "60px 20px", color: "#929999" }}>
-                  <ShoppingCart style={{ width: 48, height: 48, margin: "0 auto 16px", opacity: 0.2 }} />
-                  <div style={{ fontSize: 15, fontWeight: 500, color: "#666", marginBottom: 6 }}>Корзина пуста</div>
+                <div style={{ padding: "60px 20px", textAlign: "center", color: "var(--gray)" }}>
+                  <ShoppingCart style={{ width: 48, height: 48, margin: "0 auto 16px", color: "var(--lt-gray)" }} />
+                  <div style={{ fontSize: 15, fontWeight: 500, color: "var(--dr-gray)", marginBottom: 8 }}>Корзина пуста</div>
                   <div style={{ fontSize: 13 }}>Добавьте товары из каталога</div>
                 </div>
               ) : (
-                <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                  {cart.map((item) => {
-                    const p = products.find((x) => x.id === item.id);
-                    if (!p) return null;
-                    return (
-                      <div key={item.id} style={{
-                        display: "flex", gap: 12, alignItems: "flex-start",
-                        padding: 12, borderRadius: 4,
-                        border: "1px solid #d8d8d8",
-                        background: "#f9f9f9",
-                      }}>
-                        <img src={p.image} alt={p.name} style={{ width: 60, height: 60, objectFit: "cover", borderRadius: 3, flexShrink: 0 }} />
-                        <div style={{ flex: 1, minWidth: 0 }}>
-                          <div style={{ fontSize: 13, fontWeight: 500, color: "#333", lineHeight: 1.3, marginBottom: 6 }}>{p.name}</div>
-                          <div style={{ fontSize: 12, color: "#929999", marginBottom: 8 }}>{p.price.toLocaleString("ru-RU")} ₽ / {p.unit}</div>
-                          <div style={{ display: "flex", alignItems: "center", gap: 0, width: "fit-content", border: "1px solid #d8d8d8", borderRadius: 4, overflow: "hidden" }}>
-                            <button onClick={() => updateQty(p.id, -1)}
-                              style={{ width: 28, height: 28, background: "#f1f4f4", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "inherit" }}>
-                              <Minus style={{ width: 12, height: 12, color: "#666" }} />
-                            </button>
-                            <span style={{ padding: "0 12px", fontSize: 13, fontWeight: 600, color: "#333" }}>{item.qty}</span>
-                            <button onClick={() => addToCart(p.id)}
-                              style={{ width: 28, height: 28, background: "#f1f4f4", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "inherit" }}>
-                              <Plus style={{ width: 12, height: 12, color: "#666" }} />
-                            </button>
-                          </div>
+                cart.map((item) => {
+                  const product = products.find((p) => p.id === item.id)!;
+                  return (
+                    <div key={item.id} style={{
+                      display: "flex", gap: 12,
+                      padding: "12px 20px",
+                      borderBottom: "1px solid var(--ex-lt-gray)",
+                      alignItems: "flex-start",
+                    }}>
+                      {/* Image */}
+                      <div style={{ width: 56, height: 56, flexShrink: 0, background: "var(--xl-gray)", borderRadius: 4, overflow: "hidden" }}>
+                        <img src={product.image} alt={product.name} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+                      </div>
+
+                      {/* Info */}
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ fontSize: 13, fontWeight: 500, color: "var(--ex-dr-gray)", lineHeight: 1.3, marginBottom: 6 }}>
+                          {product.name}
                         </div>
-                        <div style={{ textAlign: "right", flexShrink: 0 }}>
-                          <div style={{ fontSize: 14, fontWeight: 700, color: "#333" }}>
-                            {(p.price * item.qty).toLocaleString("ru-RU")} ₽
+                        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
+                          {/* Qty control */}
+                          <div style={{ display: "flex", alignItems: "center", gap: 0, border: "1px solid var(--lt-gray)", borderRadius: 4, overflow: "hidden" }}>
+                            <button
+                              onClick={() => updateQty(item.id, -1)}
+                              style={{
+                                width: 28, height: 28,
+                                border: "none", borderRight: "1px solid var(--lt-gray)",
+                                background: "var(--xl-gray)",
+                                cursor: "pointer",
+                                display: "flex", alignItems: "center", justifyContent: "center",
+                                transition: "background 0.15s",
+                                fontFamily: "inherit",
+                              }}
+                              onMouseEnter={e => (e.currentTarget.style.background = "var(--primary-lighter)")}
+                              onMouseLeave={e => (e.currentTarget.style.background = "var(--xl-gray)")}
+                            >
+                              <Minus style={{ width: 11, height: 11, color: "var(--dr-gray)" }} />
+                            </button>
+                            <span style={{ width: 30, textAlign: "center", fontSize: 13, fontWeight: 600, color: "var(--ex-dr-gray)" }}>
+                              {item.qty}
+                            </span>
+                            <button
+                              onClick={() => updateQty(item.id, 1)}
+                              style={{
+                                width: 28, height: 28,
+                                border: "none", borderLeft: "1px solid var(--lt-gray)",
+                                background: "var(--primary)",
+                                cursor: "pointer",
+                                display: "flex", alignItems: "center", justifyContent: "center",
+                                transition: "background 0.15s",
+                                fontFamily: "inherit",
+                              }}
+                              onMouseEnter={e => (e.currentTarget.style.background = "var(--primary-dark)")}
+                              onMouseLeave={e => (e.currentTarget.style.background = "var(--primary)")}
+                            >
+                              <Plus style={{ width: 11, height: 11, color: "var(--ex-dr-gray)" }} />
+                            </button>
                           </div>
+
+                          {/* Price */}
+                          <div style={{ fontWeight: 700, fontSize: 15, color: "var(--ex-dr-gray)", whiteSpace: "nowrap" }}>
+                            {product.price * item.qty} ₽
+                          </div>
+
+                          {/* Remove */}
                           <button
-                            onClick={() => updateQty(p.id, -item.qty)}
-                            style={{ background: "none", border: "none", cursor: "pointer", marginTop: 8, padding: 0 }}
+                            onClick={() => setCart(prev => prev.filter(i => i.id !== item.id))}
+                            style={{ background: "none", border: "none", cursor: "pointer", padding: 4, borderRadius: 4, color: "var(--lt-gray)" }}
+                            onMouseEnter={e => (e.currentTarget.style.color = "var(--red)")}
+                            onMouseLeave={e => (e.currentTarget.style.color = "var(--lt-gray)")}
                           >
-                            <X style={{ width: 16, height: 16, color: "#d8d8d8" }} />
+                            <X style={{ width: 14, height: 14 }} />
                           </button>
                         </div>
                       </div>
-                    );
-                  })}
-                </div>
+                    </div>
+                  );
+                })
               )}
             </div>
 
             {/* Cart footer */}
             {cart.length > 0 && (
-              <div style={{ padding: "16px 20px", borderTop: "1px solid #d8d8d8" }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-                  <span style={{ fontSize: 14, color: "#666" }}>Итого:</span>
-                  <span style={{ fontSize: 20, fontWeight: 700, color: "#333" }}>{totalPrice.toLocaleString("ru-RU")} ₽</span>
+              <div style={{ padding: "16px 20px", borderTop: "1px solid var(--lt-gray)" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 16 }}>
+                  <span style={{ fontSize: 14, color: "var(--dr-gray)" }}>Итого:</span>
+                  <span style={{ fontSize: 22, fontWeight: 700, color: "var(--ex-dr-gray)" }}>{totalPrice} ₽</span>
                 </div>
-                <button style={{
-                  width: "100%",
-                  background: "#10b16b",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: 4,
-                  padding: "13px 0",
-                  fontSize: 15,
-                  fontWeight: 600,
-                  cursor: "pointer",
-                  marginBottom: 10,
-                  fontFamily: "inherit",
-                  transition: "background 0.15s",
-                }}
-                  onMouseEnter={e => (e.currentTarget.style.background = "#0c824f")}
-                  onMouseLeave={e => (e.currentTarget.style.background = "#10b16b")}
+                <button
+                  style={{
+                    width: "100%",
+                    height: 44,
+                    background: "var(--primary)",
+                    color: "var(--ex-dr-gray)",
+                    border: "none",
+                    borderRadius: 4,
+                    fontSize: 15,
+                    fontWeight: 600,
+                    cursor: "pointer",
+                    fontFamily: "inherit",
+                    transition: "background 0.15s",
+                    marginBottom: 8,
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.background = "var(--primary-dark)")}
+                  onMouseLeave={e => (e.currentTarget.style.background = "var(--primary)")}
                 >
                   Оформить заказ
                 </button>
-                <button onClick={() => setCartOpen(false)} style={{
-                  width: "100%",
-                  background: "transparent",
-                  color: "#929999",
-                  border: "1px solid #d8d8d8",
-                  borderRadius: 4,
-                  padding: "10px 0",
-                  fontSize: 13,
-                  cursor: "pointer",
-                  fontFamily: "inherit",
-                  transition: "all 0.15s",
-                }}
-                  onMouseEnter={e => { e.currentTarget.style.borderColor = "#929999"; e.currentTarget.style.color = "#666"; }}
-                  onMouseLeave={e => { e.currentTarget.style.borderColor = "#d8d8d8"; e.currentTarget.style.color = "#929999"; }}
+                <button
+                  onClick={() => setCartOpen(false)}
+                  style={{
+                    width: "100%",
+                    height: 36,
+                    background: "transparent",
+                    color: "var(--dr-gray)",
+                    border: "1px solid var(--lt-gray)",
+                    borderRadius: 4,
+                    fontSize: 13,
+                    cursor: "pointer",
+                    fontFamily: "inherit",
+                    transition: "all 0.15s",
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.background = "var(--xl-gray)"; e.currentTarget.style.borderColor = "var(--gray)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "var(--lt-gray)"; }}
                 >
                   Продолжить покупки
                 </button>

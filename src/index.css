@@ -2,91 +2,126 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+/* ===== KRAUND.RU DESIGN SYSTEM ===== */
+:root {
+  /* Font */
+  --defaultFontFamily:
+    "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans";
+
+  /* Font sizes */
+  --font-size: 16px;
+  --line-height: 1.4rem;
+  --h1: 4rem;
+  --h2: 2.25rem;
+  --h3: 1.75rem;
+  --h4: 1.5rem;
+  --h5: 1.25rem;
+  --h6: 1rem;
+  --p: 0.875rem;
+  --notify: 0.8rem;
+  --caption: 0.75rem;
+  --small: 0.7rem;
+  --label: 0.85rem;
+  --value: 0.9rem;
+
+  /* Colors - Grays */
+  --black: #000;
+  --ex-dr-gray: #333;
+  --dr-gray: #666;
+  --gray: #929999;
+  --lt-gray: #d8d8d8;
+  --xl-gray: #f9f9f9;
+  --ex-lt-gray: #f1f4f4;
+  --white: #fff;
+
+  /* Primary - Yellow */
+  --primary-darker: #9b9001;
+  --primary-dark: #cec001;
+  --primary: #fef037;
+  --primary-light: #fef46a;
+  --primary-lighter: #fffbcf;
+
+  /* Secondary - Green */
+  --secondary-darker: #032516;
+  --secondary-dark: #0c824f;
+  --secondary: #10b16b;
+  --secondary-light: #14e087;
+  --secondary-lighter: #51efab;
+
+  /* Semantic colors */
+  --attention: #fffaee;
+  --red: #d20046;
+  --disabled: #bbb;
+  --default: #666;
+
+  /* Status colors */
+  --success: #73e08c;
+  --info: #7bd7e6;
+  --warning: #e7cc7b;
+  --danger: #e07680;
+  --success-light: #b5ffc9;
+  --info-light: #a4f2ff;
+  --warning-light: #ffefb3;
+  --danger-light: #ffb6be;
+  --danger-dark: #be2839;
+
+  /* Shadows */
+  --shadow-null: 0 0 0 transparent;
+  --shadow-sm: 0 0 3px hsla(0, 0%, 39%, 0.5);
+  --shadow-md: 0 0 10px hsla(0, 0%, 39%, 0.2);
+  --shadow-lg: 0 16px 50px #c0cdcd;
+  --shadow-hard: 0 0 3px #000;
+
+  /* Borders */
+  --border-size: 1px;
+  --border-color: #d8d8d8;
+  --border-lt-color: #f1f4f4;
+
+  /* Layout */
+  --gutter: 40px;
+  --offset: 40px;
+
+  /* Tailwind compat */
+  --background: 0 0% 100%;
+  --foreground: 0 0% 20%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 20%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 20%;
+  --primary-tw: 54 99% 60%;
+  --primary-foreground: 0 0% 20%;
+  --secondary: 180 3% 95%;
+  --secondary-foreground: 0 0% 20%;
+  --muted: 180 3% 95%;
+  --muted-foreground: 180 1% 57%;
+  --accent: 180 3% 95%;
+  --accent-foreground: 0 0% 20%;
+  --destructive: 336 100% 41%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 0 0% 85%;
+  --input: 0 0% 85%;
+  --ring: 54 99% 60%;
+  --radius: 0.25rem;
+
+  --sidebar-background: 0 0% 98%;
+  --sidebar-foreground: 0 0% 40%;
+  --sidebar-primary: 54 99% 60%;
+  --sidebar-primary-foreground: 0 0% 20%;
+  --sidebar-accent: 54 100% 90%;
+  --sidebar-accent-foreground: 0 0% 20%;
+  --sidebar-border: 0 0% 85%;
+  --sidebar-ring: 54 99% 60%;
+}
+
+@media screen and (max-width: 980px) {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --h1: 2.5rem;
   }
+}
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+@media screen and (max-width: 540px) {
+  :root {
+    --h1: 1.75rem;
   }
 }
 
@@ -96,6 +131,129 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    font-family: var(--defaultFontFamily), Arial, sans-serif;
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    background: var(--ex-lt-gray);
+    color: var(--ex-dr-gray);
   }
+}
+
+/* ===== KRAUND COMPONENTS ===== */
+
+/* Input styles */
+.kr-input {
+  height: 36px;
+  border: 1px solid var(--lt-gray);
+  border-radius: 4px;
+  padding: 0 12px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--ex-dr-gray);
+  background: var(--white);
+  outline: none;
+  transition: border-color 0.15s;
+}
+.kr-input:focus {
+  border-color: var(--primary-dark);
+}
+.kr-input::placeholder {
+  color: var(--gray);
+}
+
+/* Button primary (yellow) */
+.kr-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 16px;
+  background: var(--primary);
+  color: var(--ex-dr-gray);
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s;
+  text-decoration: none;
+}
+.kr-btn:hover {
+  background: var(--primary-dark);
+}
+
+/* Button secondary (green) */
+.kr-btn-green {
+  background: var(--secondary);
+  color: var(--white);
+}
+.kr-btn-green:hover {
+  background: var(--secondary-dark);
+}
+
+/* Button outline */
+.kr-btn-outline {
+  background: transparent;
+  border: 1px solid var(--lt-gray);
+  color: var(--dr-gray);
+}
+.kr-btn-outline:hover {
+  background: var(--xl-gray);
+  border-color: var(--gray);
+}
+
+/* Card */
+.kr-card {
+  background: var(--white);
+  border-radius: 4px;
+  box-shadow: var(--shadow-md);
+}
+
+/* Badge */
+.kr-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
+
+/* Product cart button counter */
+.kr-qty-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--lt-gray);
+  border-radius: 4px;
+  background: var(--white);
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--dr-gray);
+  transition: all 0.15s;
+}
+.kr-qty-btn:hover {
+  border-color: var(--primary-dark);
+  background: var(--primary-lighter);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ex-lt-gray);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--lt-gray);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gray);
 }
