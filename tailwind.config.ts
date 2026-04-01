@@ -19,12 +19,30 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				sans: ['Roboto', 'Lucida Grande', 'DejaVu Sans', 'Arial', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				// kraund.ru palette
+				'kr-primary': '#fef037',
+				'kr-primary-dark': '#cec001',
+				'kr-primary-darker': '#9b9001',
+				'kr-primary-light': '#fef46a',
+				'kr-primary-lighter': '#fffbcf',
+				'kr-secondary': '#10b16b',
+				'kr-secondary-dark': '#0c824f',
+				'kr-gray': '#929999',
+				'kr-lt-gray': '#d8d8d8',
+				'kr-xl-gray': '#f9f9f9',
+				'kr-ex-lt-gray': '#f1f4f4',
+				'kr-dr-gray': '#666',
+				'kr-ex-dr-gray': '#333',
+				'kr-red': '#d20046',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
